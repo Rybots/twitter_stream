@@ -1,0 +1,20 @@
+
+<!-- (1) -->
+<div id="result">
+</div>
+ 
+<%= javascript_tag do %>
+    $(function() {
+                <!-- (2) -->
+                        var eventSource = new EventSource("/stream");
+                         
+                                <!-- (3) -->
+                                        eventSource.addEventListener("message", function(event) {
+                                                      $("#result").text(event.data);
+                                                              });
+                                                eventSource.addEventListener("done", function(event) {
+                                                              this.close();
+                                                                          $("#result").text(event.data);
+                                                                                  });
+                                                    });
+<% end %>
